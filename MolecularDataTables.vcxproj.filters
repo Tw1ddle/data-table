@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\io">
+      <UniqueIdentifier>{9e60935b-130a-424a-b24e-88c461e4c717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\args">
+      <UniqueIdentifier>{5add4a3a-89dc-49de-8ae2-98e190ae3f61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\datasource">
+      <UniqueIdentifier>{301fd7f7-5df0-4345-a0e8-0ff277efbecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\datatable">
+      <UniqueIdentifier>{11c6815e-e8f3-471f-bd86-34843d2d3304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\io\csv">
+      <UniqueIdentifier>{a3a21d17-db61-4997-acd7-f83eb81a4aae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\io\console">
+      <UniqueIdentifier>{baaf8010-468f-4b6c-9780-ea129ed7e239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\datasource">
+      <UniqueIdentifier>{7e98d4e6-2a74-4023-9240-7ffaa0b914de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\datatable">
+      <UniqueIdentifier>{dcf37119-c0ba-4546-8e14-c7bc41c005a5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="datasource\DataSource.cpp">
+      <Filter>Source Files\datasource</Filter>
+    </ClCompile>
+    <ClCompile Include="datatable\DataTablePrinter.cpp">
+      <Filter>Source Files\datatable</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="args\argparse.hpp">
+      <Filter>Header Files\args</Filter>
+    </ClInclude>
+    <ClInclude Include="datatable\DataTable.h">
+      <Filter>Header Files\datatable</Filter>
+    </ClInclude>
+    <ClInclude Include="datasource\DataSource.h">
+      <Filter>Header Files\datasource</Filter>
+    </ClInclude>
+    <ClInclude Include="io\csv\csv.h">
+      <Filter>Header Files\io\csv</Filter>
+    </ClInclude>
+    <ClInclude Include="io\console\TextTable.h">
+      <Filter>Header Files\io\console</Filter>
+    </ClInclude>
+    <ClInclude Include="datatable\DataTablePrinter.h">
+      <Filter>Header Files\datatable</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
