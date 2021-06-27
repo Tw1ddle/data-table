@@ -110,36 +110,59 @@ int run(int argc, char* argv[])
     }
 
 
-    // Perform some set operations on the data tables and print to console
+    // Perform some set operations on the data tables and print the results to console
+    if (tables.size() < 2) {
+        std::cerr << "Fewer than 2 tables loaded, so we can't try some set operations, exiting..." << std::endl;
+        return -3;
+    }
 
-    // Union
-    const auto unionTables = [](const datatable::DataTable& first, const datatable::DataTable& second) -> datatable::DataTable {
+    const auto tablesUnion = std::make_pair("Set Union", [](const datatable::DataTable& first, const datatable::DataTable& second) -> datatable::DataTable {
         datatable::DataTable result;
         std::set_union(first.begin(), first.end(), second.begin(), second.end(), std::inserter(result, result.begin()), &datatable::compareRecords);
         return result;
-    };
+    });
 
-    // Standard library implements the other set operations too
+    const auto tablesDifference = std::make_pair("Set Difference", [](const datatable::DataTable& first, const datatable::DataTable& second) -> datatable::DataTable {
+        datatable::DataTable result;
+        std::set_difference(first.begin(), first.end(), second.begin(), second.end(), std::inserter(result, result.begin()), &datatable::compareRecords);
+        return result;
+    });
 
-    if (tables.size() >= 2) {
-        std::cout << "Will print combination of tables: " << tables[0].first << " and " << tables[1].first << std::endl;
+    const auto tablesSymmetricDifference = std::make_pair("Set Symmetric Difference", [](const datatable::DataTable& first, const datatable::DataTable& second) -> datatable::DataTable {
+        datatable::DataTable result;
+        std::set_symmetric_difference(first.begin(), first.end(), second.begin(), second.end(), std::inserter(result, result.begin()), &datatable::compareRecords);
+        return result;
+    });
 
-        std::cout << "Table 1: " << tables[0].first << ":" << std::endl;
-        datatable::printDataTable(tables[0].second);
+    const auto tablesIntersection = std::make_pair("Set Intersection", [](const datatable::DataTable& first, const datatable::DataTable& second) -> datatable::DataTable {
+        datatable::DataTable result;
+        std::set_intersection(first.begin(), first.end(), second.begin(), second.end(), std::inserter(result, result.begin()), &datatable::compareRecords);
+        return result;
+    });
 
-        std::cout << "Table 2: " << tables[1].first << ":" << std::endl;
-        datatable::printDataTable(tables[1].second);
+    const std::vector<std::pair<std::string, std::function<datatable::DataTable(const datatable::DataTable&, const datatable::DataTable&)>>> setOps =
+        { tablesUnion, tablesDifference, tablesSymmetricDifference, tablesIntersection };
+    for (const auto& setOp : setOps) {
+        std::cout << "\n\n" << "Will print " << setOp.first << " of tables from: " << tables[0].first << " and " << tables[1].first << "\n\n" << std::endl;
+        const auto& tableOne = tables[0].second;
+        const auto& tableTwo = tables[1].second;
 
-        std::cout << "Combined table: " << std::endl;
+        std::cout << "Table 1:" << std::endl;
+        datatable::printDataTable(tableOne);
+        std::cout << "\n" << std::endl;
+        std::cout << "Table 2:" << std::endl;
+        datatable::printDataTable(tableTwo);
 
-        datatable::printDataTable(unionTables(tables[0].second, tables[1].second));
+        std::cout << "\n\n" << "Resulting table (" << setOp.first << ")" << std::endl;
+
+        datatable::printDataTable(setOp.second(tableOne, tableTwo));
     }
 
     // To merge tables with different property columns, you would want to have a validation layer
-    // that implements policies e.g. for "missing" columns, "bad" values e.g. NaN, range/regex-like checks etc
-    // In this demo app, you might do something like that by extending the CSV importer code
+    // that implements policies e.g. for how to fill in "missing" data, handling "bad" values e.g. NaN, range/regex-like checks etc
+    // In this demo app, you might do something like that by extending the importer code (DataSource.h/cpp)
     // In a real application, this is probably not something you'd do at level of individual importers/exporters
-    // instead move the data through some grand central database
+    // instead move the data through some grand central database that performs validation
 
     std::cout << "Successfully finished running demo application" << std::endl;
     return 0;
