@@ -158,12 +158,6 @@ int run(int argc, char* argv[])
         datatable::printDataTable(setOp.second(tableOne, tableTwo));
     }
 
-    // To merge tables with different property columns, you would want to have a validation layer
-    // that implements policies e.g. for how to fill in "missing" data, handling "bad" values e.g. NaN, range/regex-like checks etc
-    // In this demo app, you might do something like that by extending the importer code (DataSource.h/cpp)
-    // In a real application, this is probably not something you'd do at level of individual importers/exporters
-    // instead move the data through some grand central database that performs validation
-
     std::cout << "Successfully finished running demo application" << std::endl;
     return 0;
 }
